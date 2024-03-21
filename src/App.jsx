@@ -17,6 +17,21 @@ function App() {
     setNewItem("")
   }
 
+  function toggleTodo(id, completed) {
+    setTodos(currentTodos => {
+      return currentTodos.map(todo => {
+        if (todo.id === id) {
+          return { ...todo, completed }
+        }
+
+        return todo
+      })
+        
+        
+      })
+    }
+  
+
   return (
     <div className='flex flex-col justify-center items-center h-screen max-w-3xl mx-auto'>
       <form onSubmit={handleSubmit} className='bg-slate-200 p-4 rounded-lg w-full lg:w-3/4 xl:w-2/3 mb-4'>
@@ -44,7 +59,8 @@ function App() {
             <label>
               <input 
                 type="checkbox" 
-                checked={todo.completed} 
+                checked={todo.completed}
+                onChange={ e => toggleTodo(todo.id, e.target.checked)}
                 id='item' 
                 placeholder='type here' />
               <span className='mx-2'>{todo.title}</span>
