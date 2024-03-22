@@ -1,9 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function App() {
   
   const [newItem, setNewItem] = useState('');
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const localValue = localStorage.getItem("ITEMS")
+    if (localValue == null) return []
+    return JSON.parse(localValue)
+  });
+
+  useEffect(() => {
+    localStorage.setItem("ITEM", JSON.stringify(todos));
+  }, [todos])
 
   function handleSubmit(e) {
     e.preventDefault();
