@@ -31,9 +31,16 @@ function App() {
       })
     }
   
+  function deleteTodo(id) {
+    setTodos(currentTodos => {
+     return currentTodos.filter(todo => todo.id !== id) 
+    })
+  
+  }
+
 
   return (
-    <div className='flex flex-col justify-center items-center h-screen max-w-3xl mx-auto'>
+    <div className='flex flex-col justify-center items-center h-screen max-w-3xl mx-auto px-4'>
       <form onSubmit={handleSubmit} className='bg-slate-200 p-4 rounded-lg w-full lg:w-3/4 xl:w-2/3 mb-4'>
         <label htmlFor='item' className='block text-xl font-semibold mb-4'>
           New item
@@ -65,7 +72,9 @@ function App() {
                 placeholder='type here' />
               <span className='mx-2'>{todo.title}</span>
             </label>
-            <button className="text-white bg-red-600 p-2 rounded-lg border-2 hover:bg-red-200 hover:text-red-800 hover:font-semibold">Delete</button>
+            <button 
+              onClick={() => deleteTodo(todo.id)} 
+              className="text-white bg-red-600 p-2 rounded-lg border-2 hover:bg-red-200 hover:text-red-800 hover:font-semibold">Delete</button>
           </li>)
         }
         
